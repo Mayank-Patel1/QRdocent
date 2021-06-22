@@ -1,2 +1,3 @@
 # QRdocent
-A app bro
+An application for scanning QR codes for people to use at musuems.
+
