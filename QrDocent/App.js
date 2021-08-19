@@ -27,22 +27,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
-
 const App = () => {
-
   return (
-    <View style={{backgroundColor:"#282B33", flex:1, justifyContent:"center"}}>
-    <View style={{ flex:0.3, justifyContent:"space-between", alignItems:"center"}}>
-      <Text style={{color:"white",  fontFamily:"Roboto", fontSize:37}}>HELLO WORLD</Text>
-      <Image
-        source={require('./images/image4.png')}
-
-      ></Image>
-</View>
+    <View
+      style={{backgroundColor: '#282B33', flex: 1, justifyContent: 'center'}}>
+      <View
+        style={{
+          flex: 0.3,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text style={{color: 'white', fontFamily: 'System', fontSize: 37}}>
+          HELLO WORLD
+        </Text>
+        <Image source={require('./images/image4.png')}></Image>
+      </View>
     </View>
   );
 };
-
 
 export default App;
