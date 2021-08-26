@@ -1,21 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+ import React from 'react';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ import {
+   SafeAreaView,
+   ScrollView,
+   StatusBar,
+   StyleSheet,
+   Text,
+   useColorScheme,
+   Image,
+   View,
+ } from 'react-native';
+ 
+ import {
+   Colors,
+   DebugInstructions,
+   Header,
+   LearnMoreLinks,
+   ReloadInstructions,
+ } from 'react-native/Libraries/NewAppScreen';
+ 
+ const App = () => {
+   return (
+     <View
+       style={{backgroundColor: '#282B33', flex: 1, justifyContent: 'center'}}>
+       <View
+         style={{
+           flex: 0.3,
+           justifyContent: 'space-between',
+           alignItems: 'center',
+         }}>
+         <Text style={{color: 'white', fontFamily: 'System', fontSize: 37}}>
+           QR DOCENT
+         </Text>
+         <Image source={require('./images/image4.png')}></Image>
+       </View>
+     </View>
+   );
+ };
+ 
+ export default App;
+ 
