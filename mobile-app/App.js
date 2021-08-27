@@ -6,45 +6,48 @@
  * @flow strict-local
  */
 
- import React from 'react';
+import React from 'react';
+import { Text, Image, View } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './Screens/HomeScreen';
+import QRScreen from './Screens/QRScreen';
 
- import {
-   SafeAreaView,
-   ScrollView,
-   StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   Image,
-   View,
- } from 'react-native';
- 
- import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
- 
- const App = () => {
-   return (
-     <View
-       style={{backgroundColor: '#282B33', flex: 1, justifyContent: 'center'}}>
-       <View
-         style={{
-           flex: 0.3,
-           justifyContent: 'space-between',
-           alignItems: 'center',
-         }}>
-         <Text style={{color: 'white', fontFamily: 'System', fontSize: 37}}>
-           QR DOCENT
-         </Text>
-         <Image source={require('./images/image4.png')}></Image>
-       </View>
-     </View>
-   );
- };
- 
- export default App;
- 
+
+const Stack = createNativeStackNavigator();
+
+
+// Create a custom theme object
+const theme = {
+  ...DefaultTheme,
+
+}
+
+const App = () => {
+
+
+
+
+  return (
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: "Welcome" }} />
+          <Stack.Screen
+            name="QR Scanner"
+            component={QRScreen}
+            options={{ title: "Scanner" }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
+  );
+};
+
+export default App;
