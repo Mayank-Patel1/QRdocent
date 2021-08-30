@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
 import QRScreen from './Screens/QRScreen';
+import HelpScreen from './Screens/HelpScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,10 @@ const App = () => {
             name="QR Scanner"
             component={QRScreen}
             options={{ title: "Scanner" }} />
+          <Stack.Screen
+            name="Help"
+            component={HelpScreen}
+            options={{ title: "Help" }} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
