@@ -6,9 +6,7 @@ import CameraButton from '../Components/CameraButton';
 import ShowMeButton from '../Components/ShowMeButton';
 import ScanningIcon from '../Components/SvgComponents/ScanningIcon';
 import Header from '../Components/Header';
-import ScannedExhibits from '../Components/ScannedExhibits';
 const HomeScreen = ({ navigation }) => {
-    const userScans = true;
 
     function goScan() {
         navigation.navigate('QR Scanner')
@@ -22,9 +20,8 @@ const HomeScreen = ({ navigation }) => {
         <View
             style={{ backgroundColor: '#282B33', flex: 1, }}>
                 <Header showSettings={true}/>
-                {/* If the user hasn't scanned any QR codes */}
-            {!userScans && <View style={{ flex: 0.085, }}></View>}
-            {!userScans && <View
+            <View style={{ flex: 0.085}}></View>
+            <View
                 style={{
                     flex: 0.40,
                     justifyContent: 'space-between',
@@ -38,16 +35,7 @@ const HomeScreen = ({ navigation }) => {
 
 
                 <ShowMeButton goHelp={goHelp} />
-            </View>}
-
-
-{/* If the User has scanned QR codes before */}
-            {userScans && <ScannedExhibits/>}
-                
-
-
-            
-          
+            </View>
             <View style={{ flex: 0.4,justifyContent: "flex-end", alignItems: "center", paddingBottom:40 }}>
                 <CameraButton goScan={goScan} size={90} borderRadius={44}/>
             </View>
