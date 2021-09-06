@@ -4,13 +4,19 @@ import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'rea
 
 const Header = (props) => {
     const [settings, setSettings] = useState(props.showSettings ? true : false);
-    
-  
-
     return (
-        <View style={styles.header}>
-            <View style={styles.headerLogo}>
-                <Image source={require('../images/QRlogo.png')} style={{ width: 21, height: 21, tintColor:"white" }} tintColor="white"></Image>
+        /* Adding functionality to QRdocent logo and text to send users back home.
+         * <Button  icon={
+            <Image source={require('../images/QRlogo.png')} style={{ width: 21, height: 21, tintColor:"white"}} tintColor="white"></Image>
+            size={15}
+            color="white"
+            />
+            }  title="QRdocent logo"
+            />
+         */
+        <View style={styles.header} >
+            <View style={styles.headerLogo}  >
+                <Image source={require('../images/QRlogo.png')} style={{ width: 21, height: 21, tintColor:"white"}} tintColor="white"></Image>
                 <Text style={{ color: 'white', fontFamily: 'System', fontSize: 20 }}>QR DOCENT</Text>
             </View>
             { settings && <IconButton icon="cog-outline" color="white" raised labelStyle={{ fontSize: 25 }} style={styles.settingsButton} onPress={()=>console.log("go to settings")} />}
