@@ -19,9 +19,7 @@ const HelpScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-
-            <Header showSettings={true}/>
-
+            <Header goHome={goHome} showSettings={true}/>
             <View style={styles.headingContainer}>
                 <Text style={styles.title}>HOW TO USE {'\n'} THE APP</Text>
             </View>

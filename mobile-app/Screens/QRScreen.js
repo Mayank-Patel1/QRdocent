@@ -16,10 +16,7 @@ const QRScreen = ({ navigation }) => {
 
     const viewMinX = (windowW - viewW) / 2;
     const viewMinY = (windowH - viewH) / 2;
-
-    // height - (0.115 * height)
-
-
+    
     function goHome() {
         console.log("pressed!", height, width, "View", viewH, viewW);
         navigation.navigate('Home');
@@ -69,10 +66,6 @@ const QRScreen = ({ navigation }) => {
           );
             
         }
-
-
-
-       
     };
 
     if (hasPermission === null) {
@@ -86,9 +79,6 @@ const QRScreen = ({ navigation }) => {
 
     return (
         <View>
-
-
-            
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={{ height: "100%", width: "100%" }}
@@ -96,7 +86,7 @@ const QRScreen = ({ navigation }) => {
 
             >
                 <View style={{ flex: 1, justifyContent: "space-between" }}>
-                    <Header showSettings={true}/>
+                    <Header goHome={goHome} showSettings={true}/>
 
                     <QRscanner scanned={scanned} setDimensions={setDimensions} />
                
@@ -104,32 +94,23 @@ const QRScreen = ({ navigation }) => {
                         <Button icon="keyboard-return" color="white" raised labelStyle={{ fontSize: 43, textAlign: "center" }} style={styles.backButton} onPress={goHome}></Button>
                     </View>
                 </View>
-
             </BarCodeScanner>
-         
-
-
             {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
- 
-   
     footer: {
         flex: 0.11,
         backgroundColor: "#282B33",
         justifyContent: "center",
         alignItems: "center"
-
     },
     backButton: {
         width: 150,
         borderRadius: 23
     }
-
-
 })
 
 

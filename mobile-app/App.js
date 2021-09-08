@@ -27,9 +27,6 @@ const theme = {
 
 const App = () => {
 
-
-
-
   return (
     <PaperProvider>
       <NavigationContainer>
