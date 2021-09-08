@@ -8,6 +8,7 @@ const Generate = (props) => {
 
     const styles = {
         container: {
+            marginTop: 20,
             height: 47,
             width: 205,  
             borderRadius: 20, 
@@ -18,7 +19,6 @@ const Generate = (props) => {
         text: {
             color: "white",
             fontSize: 13
-
         }
         
     }
@@ -26,7 +26,6 @@ const Generate = (props) => {
     return (
         <TouchableOpacity  style={{ borderRadius: 50 }} onPress={props.goHelp} disabled={props.disable}>
             <LinearGradient
-
                 colors={['#614AD3', '#864AD3']}
                 style={styles.container}>
                     <MusicIcon/>
