@@ -8,7 +8,7 @@ const Header = (props) => {
     return (
         <View style={styles.header} >
             <View style={styles.headerLogo}>
-                <Button onPress={props.goHome}><Image source={require('../images/QRlogo.png')} style={{ width: 21, height: 21, tintColor:"white"}} tintColor="white"></Image>
+                <Button onPress={props.goHome} contentStyle={{width:176, marginLeft:-13}}><Image source={require('../images/QRlogo.png')} style={{ width: 21, height: 21, tintColor:"white"}} tintColor="white"></Image>
                 <Text style={{ color: 'white', fontFamily: 'System', fontSize: 20 }}>QR DOCENT</Text></Button>
             </View>
             { settings && <IconButton icon="cog-outline" color="white" raised labelStyle={{ fontSize: 25 }} style={styles.settingsButton} onPress={()=>console.log("go to settings")} />}

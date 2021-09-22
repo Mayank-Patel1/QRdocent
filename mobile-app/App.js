@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen';
 import QRScreen from './Screens/QRScreen';
 import HelpScreen from './Screens/HelpScreen';
+import ExhibitScreen from './Screens/ExhibitScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -46,6 +47,10 @@ const App = () => {
             name="Help"
             component={HelpScreen}
             options={{ title: "Help" }} />
+          <Stack.Screen
+            name="Exhibit"
+            component={ExhibitScreen}
+            options={{ title: "Exhibit" }} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
