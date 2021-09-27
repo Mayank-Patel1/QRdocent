@@ -26,23 +26,17 @@ const HomeScreen = ({ navigation }) => {
                     flex: 0.40,
                     justifyContent: 'space-between',
                     alignItems: 'center',
-
                 }}>
                 <ScanningIcon style={{ stroke: "white" }} stroke="white"></ScanningIcon>
                 <Text style={{ color: 'white', fontFamily: 'System', fontSize: 37, textAlign: "center" }}>
                     SCAN A CODE TO {"\n"} GET STARTED.
                 </Text>
-
-
                 <ShowMeButton goHelp={goHelp} />
             </View>
             <View style={{ flex: 0.4,justifyContent: "flex-end", alignItems: "center", paddingBottom:40 }}>
                 <CameraButton goScan={goScan} size={90} borderRadius={44}/>
             </View>
-
-
         </View>
     )
 }
-
 export default HomeScreen;
