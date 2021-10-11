@@ -18,7 +18,6 @@ import {
 
 } from "react-native";
 
-
 const ExhibitScreen = ({ route, navigation }) => {
     const [bioHeight, setBioHeight] = useState(191);
     const fixed = {
@@ -29,16 +28,12 @@ const ExhibitScreen = ({ route, navigation }) => {
         left: 0,
         right: 0,
         bottom: 0,
-
-
     }
 
     const bio = {
         height: bioHeight,
         margin: 15,
         marginHorizontal: 25
-
-
     }
 
     function goHome() {
@@ -49,19 +44,15 @@ const ExhibitScreen = ({ route, navigation }) => {
 
         if (bioHeight === 191) {
             setBioHeight("100%")
-
-
         }
         else {
             setBioHeight(191)
-
         }
     }
 
     return (
         <View style={styles.container}>
             <ImageBackground source={{ uri: route.params.data.artistImage }} style={{ ...fixed }}>
-
             </ImageBackground>
             <IconButton
                 style={styles.button}
@@ -72,12 +63,8 @@ const ExhibitScreen = ({ route, navigation }) => {
             />
 
             <ScrollView style={styles.scrollView}>
-
-
                 <View style={{ height: 300, width: "100%", justifyContent: "flex-end", paddingTop: 30 }}>
-
                     <Text style={styles.name}>{route.params.data.name}</Text>
-
                 </View>
                 <View style={{ backgroundColor: '#282B33', }}>
                     <TouchableOpacity style={bio} onPress={seeBio}>
@@ -85,10 +72,7 @@ const ExhibitScreen = ({ route, navigation }) => {
                         <Text style={styles.text}>
                             {route.params.data.biography}
                         </Text>
-
-
                         <LinearGradient
-
                             colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
                             start={{ x: 0.0, y: 0.4 }}
                             end={{ x: 0.0, y: 0.7 }}
@@ -97,11 +81,6 @@ const ExhibitScreen = ({ route, navigation }) => {
                             useViewFrame={false}
                             style={fixed} />
                     </TouchableOpacity>
-
-
-
-
-
                 </View>
             </ScrollView>
         </View>
@@ -112,13 +91,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#282B33',
-
     },
     scrollView: {
-
         flex: 1,
-
-
     },
     button: {
         width: 50,
@@ -151,9 +126,7 @@ const styles = StyleSheet.create({
         color: "white",
         marginBottom: 10,
         marginTop: 1,
-        
     }
 });
-
 
 export default ExhibitScreen;

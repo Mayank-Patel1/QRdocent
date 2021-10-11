@@ -28,7 +28,6 @@ const HelpScreen = ({navigation}) => {
             {pageNum == 3 && <HelpThree />}
             {pageNum == 4 && <HelpFour />}
 
-
             <View style={styles.nextArea}>
                 {pageNum !== 4 && <Button icon="chevron-right" labelStyle={styles.next} style={{ borderRadius:24 }} contentStyle={{ flexDirection: "row-reverse" }} onPress={changePage}>NEXT</Button>}
                 {pageNum == 4 && <Button  labelStyle={styles.next} style={{ borderRadius:24 }} onPress={goHome}>DONE</Button>}
@@ -38,7 +37,6 @@ const HelpScreen = ({navigation}) => {
 }
 
 const HelpOne = () => {
-
     return (
         <View style={styles.infoArea}>
             <View style={styles.number}>
@@ -54,7 +52,6 @@ const HelpOne = () => {
 }
 
 const HelpTwo = () => {
-
     return (
         <View style={styles.infoArea}>
             <View style={styles.number}>
@@ -64,14 +61,12 @@ const HelpTwo = () => {
                 <Text style={{ ...styles.text, marginBottom: 30 }}>Press the camera button at{"\n"} the bottom of the screen:</Text>
                 <CameraButton disable={true} size={75} borderRadius={38} />
                 <Text style={{ ...styles.text, marginTop: 30 }}>This will open the camera{"\n"} view and will let you scan the{'\n'} code.</Text>
-
             </View>
         </View>
     )
 }
 
 const HelpThree = () => {
-
     return (
         <View style={styles.infoArea}>
             <View style={styles.number}>
@@ -91,14 +86,12 @@ const HelpThree = () => {
                     and add the exhibit to your{"\n"}
                     personalized list.
                 </Text>
-
             </View>
         </View>
     )
 }
 
 const HelpFour = () => {
-
     return (
         <View style={styles.infoArea}>
             <View style={styles.number}>
@@ -112,7 +105,6 @@ const HelpFour = () => {
                     playlist based on the artists{"\n"}
                     you scanned:
                 </Text>
-
                 <Generate disable={true} />
             </View>
         </View>
@@ -128,8 +120,6 @@ const styles = StyleSheet.create({
     headingContainer: {
         flex: 0.18,
         justifyContent: "flex-end",
-
-
     },
     title: {
         color: 'white',
@@ -139,13 +129,11 @@ const styles = StyleSheet.create({
     },
     infoArea: {
         flex: 0.547,
-
         alignItems: "center"
     },
     nextArea: {
         alignItems: "center",
         flex: 0.158,
-
         justifyContent: "center"
     },
     next: {
@@ -153,15 +141,12 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "white",
         borderRadius:24
-
     },
     number: {
         flex: 0.20,
-
         justifyContent: "center"
     },
     instructions: {
-
         flex: 0.8,
         alignItems: "center",
         justifyContent: "flex-start"
