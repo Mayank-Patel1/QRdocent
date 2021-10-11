@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     height:"100%",
     display:"flex",
     alignItems:"flex-start",
-    justifyContent:"center"
+    justifyContent:"center",
+    backgroundColor:"#2F333C",
   },
   textStyle: {
     color: "white",

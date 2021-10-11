@@ -15,6 +15,9 @@ import HomeScreen from './Screens/HomeScreen';
 import QRScreen from './Screens/QRScreen';
 import HelpScreen from './Screens/HelpScreen';
 import ExhibitScreen from './Screens/ExhibitScreen';
+import SignInScreen from './Screens/SignInScreen';
+import CodeEntryScreen from './Screens/CodeEntryScreen';
+import LogInScreen from './Screens/LogInScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +38,18 @@ const App = () => {
           screenOptions={{
             headerShown: false
           }}>
+           <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ title: "Sign In" }} />
+            <Stack.Screen
+            name="LogIn"
+            component={LogInScreen}
+            options={{ title: "Log In" }} />
+            <Stack.Screen
+            name="CodeEntry"
+            component={CodeEntryScreen}
+            options={{ title: "Enter Code" }} />
           <Stack.Screen
             name="Home"
             component={HomeScreen}

@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { Text, Image, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import CameraButton from '../Components/CameraButton';
-import ShowMeButton from '../Components/ShowMeButton';
+import CameraButton from '../Components/Buttons/CameraButton';
+import ShowMeButton from '../Components/Buttons/ShowMeButton';
 import ScanningIcon from '../Components/SvgComponents/ScanningIcon';
 import Header from '../Components/Header';
 import ScannedExhibits from '../Components/ScannedExhibits';
@@ -57,7 +57,7 @@ const HomeScreen = ({ route, navigation }) => {
     }
 
     function goHome() {
-      navigation.navigate('Home')
+      navigation.navigate('SignIn')
     }
 
     return (

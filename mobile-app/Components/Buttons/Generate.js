@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Text, Image, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import MusicIcon from './SvgComponents/MusicIcon';
-import MusicModal from './MusicModal';
+import MusicIcon from '../SvgComponents/MusicIcon';
+import MusicModal from '../MusicModal';
 
 const Generate = (props) => {
     const [showModal, setShowModal] = useState(false);

@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#282B33",
         alignItems: "flex-end",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        
 
     },
     headerLogo: {
