@@ -38,4 +38,10 @@ title: {
     color: "white",
     marginBottom: 10
 },
+message: {
+  color:"#FF5D5D",
+  position:"relative",
+  bottom: 20,
+  fontSize:16,
+}
 });

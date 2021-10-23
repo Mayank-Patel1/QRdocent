@@ -13,6 +13,12 @@ const QRScreen = ({ navigation }) => {
     const windowW = width;
     const [viewH, setViewH] = useState(0);
     const [viewW, setViewW] = useState(0);
+    const [invalid, setInvalid] = useState(false);
+    const [hasPermission, setHasPermission] = useState(null);
+    const [cancelAnimation, setCancel] = useState(false);
+    const [triggerAnimation, setTrigger] = useState(false)
+    const [scanned, setScanned] = useState(false);
+
 
     const viewMinX = (windowW - viewW) / 2;
     const viewMinY = (windowH - viewH) / 2;
@@ -28,9 +34,14 @@ const QRScreen = ({ navigation }) => {
 
     }
 
-    const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false);
+    function resetScan() {
+            console.log("bruhhh")
+            setScanned(false);
+            setTrigger(false)
+        
+    }
 
+   
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -41,32 +52,33 @@ const QRScreen = ({ navigation }) => {
 
     const handleBarCodeScanned = ({ type, data, bounds }) => {
         const { x, y } = bounds.origin;
-
-
-        if (x >= viewMinX && y >= viewMinY && x <= (viewMinX + viewW / 2) && y <= (viewMinY + viewH / 2)) {
-            console.log(x, y);
+       
+        
+        if(!data.includes("qrdocent.com/qr")) {
+            setInvalid(true);
+        }
+        if (x >= viewMinX && y >= viewMinY && x <= (viewMinX + viewW / 2) && y <= (viewMinY + viewH / 2) && bounds.size.height > 150) {
+            setCancel(false)
+            console.log(bounds);
+            setTrigger(true);
             setScanned(true);
-           Alert.alert(
-            ` What you Scanned: `,
-            ` ${data} `,
-            [
-              {
-                text: "OK",
-                onPress: () => setScanned(false),
-                style: "cancel",
-              },
-            ],
-            {
-              cancelable: true,
-              onDismiss: () =>
-                Alert.alert(
-                  "This alert was dismissed by tapping outside of the alert dialog."
-                ),
-            }
-          );
+           
+            
+          // data - what is scanned
+          
+          
+            
+        } else {
+            setScanned(false);
+            setCancel(true);
             
         }
     };
+
+    function noCode () {
+        setScanned(true);
+            setCancel(true)
+    }
 
     if (hasPermission === null) {
         return <Text>Requesting for camera permission</Text>;
@@ -88,14 +100,14 @@ const QRScreen = ({ navigation }) => {
                 <View style={{ flex: 1, justifyContent: "space-between" }}>
                     <Header goHome={goHome} showSettings={true}/>
 
-                    <QRscanner scanned={scanned} setDimensions={setDimensions} />
+                    <QRscanner scanned={triggerAnimation} setDimensions={setDimensions} invalid={invalid} reset={resetScan} cancel={cancelAnimation}/>
                
                     <View style={styles.footer}>
                         <Button icon="keyboard-return" color="white" raised labelStyle={{ fontSize: 43, textAlign: "center" }} style={styles.backButton} onPress={goHome}></Button>
                     </View>
                 </View>
             </BarCodeScanner>
-            {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+            {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
         </View>
     )
 }

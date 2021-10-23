@@ -2,13 +2,14 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Text, Image, View, StyleSheet, TouchableHighlight, TouchableOpacity, ScrollView, SafeAreaView, 
-    KeyboardAvoidingView, Keyboard, useWindowDimensions, Dimensions} from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import {
+  Text, View, TouchableOpacity, ScrollView, SafeAreaView, Keyboard, Dimensions, StyleSheet
+} from 'react-native';
 import Header from '../Components/Header';
 
 import VerifyButton from '../Components/Buttons/VerifyButton';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import {
@@ -25,69 +26,134 @@ const CELL_COUNT = 6;
 const CodeEntryScreen = ({ route, navigation }) => {
 
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const {height,width} = Dimensions.get("screen")
+  const [showMessage, setMessage] = useState("");
+  const [trigger, setTrigger] = useState(true)
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+  const { height, width } = Dimensions.get("screen")
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
 
-  function goHome() {
-    //setPageNum(1);
-    navigation.navigate('Home');
+  const storeToken = async (tokens) => {
+    try {
+      const jsonTokens = JSON.stringify(tokens)
+      await AsyncStorage.setItem('@tokens', jsonTokens)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getToken = async () => {
+    try {
+        const jsonValue = await AsyncStorage.getItem('@tokens')
+        console.log(jsonValue != null ? JSON.parse(jsonValue) : null);
+    } catch (e) {
+        console.log(e);
+    }
 }
 
-  return (
-    <View style={{ backgroundColor: '#282B33', minHeight: Math.round(height)  }}>
-                
-    <Header goHome={goHome} showSettings={false}  />
+  function goHome() {
+    // setTrigger(trigger? false: true)
+    navigation.navigate('Home');
+  }
 
-    {/* <View style={styles.container}> */}
-    <ScrollView contentContainerStyle={styles.container} bounces="false" onPress={Keyboard.dismiss}>
+  function LogIn() {
+
+    const numData = JSON.stringify({
+      phoneNumber: route.params.phoneNumber,
+      confirmationCode: value
+    })
+
+    try {
+      axios({
+
+        method: 'post',
+        url: 'https://qrdocent.com/api/verifyMuseumUserConfirmationCode',
+        data: numData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+      }).then(res => {
+        if(res.data.success == false) {
+          setMessage(res.data.message);
+        } 
+        else {
+          console.log(res.data.result)
+          storeToken(res.data.result);
+          navigation.navigate('Home')
+          
+        }
+
+       
+        
+        // navigation.navigate('CodeEntry', {phoneNumber: phoneNumber});
+
+      }).catch(err => console.log(err + " ERROR"))
+    } catch (err) {
+      setMessage("cannot connect - check connection")
+    }
+
+  }
+
+
+
+  return (
+    <View style={{ backgroundColor: '#282B33', minHeight: Math.round(height) }}>
+
+      <Header goHome={goHome} showSettings={false} />
+
+      {/* <View style={styles.container}> */}
+      <ScrollView contentContainerStyle={styles.container} bounces="false" onPress={Keyboard.dismiss}>
         <Text style={styles.title}>ENTER CODE</Text>
         <Text style={{ fontSize: 20, color: "white", textAlign: "center", marginBottom: 15 }}>Enter the 6-digit verification code{"\n"} you received</Text>
-        
+
         <SafeAreaView style={styles.root}>
-     
-      <CodeField
-        ref={ref}
-        {...props}
-        value={value}
-        onChangeText={setValue}
-        cellCount={CELL_COUNT}
-        rootStyle={styles.codeFiledRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        renderCell={({index, symbol, isFocused}) => (
-          <View
-            // Make sure that you pass onLayout={getCellOnLayoutHandler(index)} prop to root component of "Cell"
-            onLayout={getCellOnLayoutHandler(index)}
-            key={index}
-            style={[styles.cellRoot, isFocused && styles.focusCell]}>
-            <Text style={styles.cellText}>
-              {symbol || (isFocused ? <Cursor /> : null)}
-            </Text>
-          </View>
-        )}
-      />
-    </SafeAreaView>
-        <TouchableOpacity onPress={()=>console.log(value)}>
-        <VerifyButton />
+
+          <CodeField
+            ref={ref}
+            {...props}
+            value={value}
+            onChangeText={setValue}
+            cellCount={CELL_COUNT}
+            rootStyle={styles.codeFiledRoot}
+            keyboardType="number-pad"
+            textContentType="oneTimeCode"
+            renderCell={({ index, symbol, isFocused }) => (
+              <View
+                // Make sure that you pass onLayout={getCellOnLayoutHandler(index)} prop to root component of "Cell"
+                onLayout={getCellOnLayoutHandler(index)}
+                key={index}
+                style={[styles.cellRoot, isFocused && styles.focusCell]}>
+                <Text style={styles.cellText}>
+                  {symbol || (isFocused ? <Cursor /> : null)}
+                </Text>
+              </View>
+            )}
+          />
+        </SafeAreaView>
+        <Text style={styles.message}>{showMessage}</Text>
+        <TouchableOpacity onPress={LogIn}>
+          <VerifyButton />
         </TouchableOpacity>
+        <TouchableOpacity onPress={getToken}>
         <Text style={{ fontSize: 17, color: "#614AD3", marginTop: 15 }}>RESEND CODE</Text>
+        </TouchableOpacity>
 
-
-    </ScrollView>
-    {/* </View>
+      </ScrollView>
+      {/* </View>
  */}
-</View>
+    </View>
 
 
 
 
 
-    
+
   );
 };
+
+
 
 export default CodeEntryScreen;
