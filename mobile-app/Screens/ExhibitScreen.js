@@ -22,7 +22,6 @@ import {
 
 } from "react-native";
 
-
 const ExhibitScreen = ({ route, navigation }) => {
     const [bioHeight, setBioHeight] = useState(191);
     const fixed = {
@@ -33,8 +32,6 @@ const ExhibitScreen = ({ route, navigation }) => {
         left: 0,
         right: 0,
         bottom: 0,
-
-
     }
 
     const bio = {
@@ -42,8 +39,6 @@ const ExhibitScreen = ({ route, navigation }) => {
         margin: 15,
         marginHorizontal: 25,
         overflow:"hidden"
-
-
     }
 
     function goHome() {
@@ -54,19 +49,15 @@ const ExhibitScreen = ({ route, navigation }) => {
 
         if (bioHeight === 191) {
             setBioHeight("auto")
-
-
         }
         else {
             setBioHeight(191)
-
         }
     }
 
     return (
         <View style={styles.container}>
             <ImageBackground source={{ uri: route.params.data.artistImage }} style={{ ...fixed }}>
-
             </ImageBackground>
             <IconButton
                 style={styles.button}
@@ -77,12 +68,8 @@ const ExhibitScreen = ({ route, navigation }) => {
             />
 
             <ScrollView style={styles.scrollView} bounces="false">
-
-
                 <View style={{ height: 300, width: "100%", justifyContent: "flex-end", paddingTop: 30 }}>
-
                     <Text style={styles.name}>{route.params.data.name}</Text>
-
                 </View>
                 <View style={{ backgroundColor: '#282B33', alignItems:"center" }}>
                     <TouchableOpacity style={bio} onPress={seeBio}>
@@ -90,10 +77,7 @@ const ExhibitScreen = ({ route, navigation }) => {
                         <Text style={styles.text}>
                             {route.params.data.biography}
                         </Text>
-
-
                        {bioHeight === 191 && <LinearGradient
-
                             colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
                             start={{ x: 0.0, y: 0.4 }}
                             end={{ x: 0.0, y: 0.7 }}
@@ -102,17 +86,12 @@ const ExhibitScreen = ({ route, navigation }) => {
                             useViewFrame={false}
                             style={fixed} />
                             }
-                    </TouchableOpacity> 
-
-
-
-
+                    </TouchableOpacity>
                     <Video src={route.params.data.videoLink}/>
                     <ExternalLink src={route.params.data.website}/>
                     <StoryCard src={route.params.data.videoLink}/>
                     <StoryCardAlt src={route.params.data.videoLink}/>
                 </View>
-                
             </ScrollView>
         </View>
     );
@@ -124,15 +103,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#282B33',
         alignItems:"center",
         justifyContent:"center"
-
     },
     scrollView: {
-
         flex: 1,
-        
-        
-
-
     },
     button: {
         width: 50,
@@ -165,9 +138,7 @@ const styles = StyleSheet.create({
         color: "white",
         marginBottom: 10,
         marginTop: 1,
-        
     }
 });
-
 
 export default ExhibitScreen;

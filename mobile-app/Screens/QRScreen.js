@@ -18,8 +18,6 @@ const QRScreen = ({ navigation }) => {
     const [cancelAnimation, setCancel] = useState(false);
     const [triggerAnimation, setTrigger] = useState(false)
     const [scanned, setScanned] = useState(false);
-
-
     const viewMinX = (windowW - viewW) / 2;
     const viewMinY = (windowH - viewH) / 2;
     
@@ -31,7 +29,6 @@ const QRScreen = ({ navigation }) => {
     function setDimensions(h,w) {
         setViewH(h);
         setViewW(w);
-
     }
 
     function resetScan() {
@@ -49,11 +46,8 @@ const QRScreen = ({ navigation }) => {
         })();
     }, []);
 
-
     const handleBarCodeScanned = ({ type, data, bounds }) => {
         const { x, y } = bounds.origin;
-       
-        
         if(!data.includes("qrdocent.com/qr")) {
             setInvalid(true);
         }
@@ -71,7 +65,6 @@ const QRScreen = ({ navigation }) => {
         } else {
             setScanned(false);
             setCancel(true);
-            
         }
     };
 
@@ -87,15 +80,12 @@ const QRScreen = ({ navigation }) => {
         return <Text>No access to camera</Text>;
     }
 
-    
-
     return (
         <View>
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={{ height: "100%", width: "100%" }}
                 bar
-
             >
                 <View style={{ flex: 1, justifyContent: "space-between" }}>
                     <Header goHome={goHome} showSettings={true}/>

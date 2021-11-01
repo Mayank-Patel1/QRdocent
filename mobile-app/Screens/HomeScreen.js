@@ -12,9 +12,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from './LoadingScreen';
 
 const HomeScreen = ({ route, navigation }) => {
-
-
-
     const [userScans, setUserScans] = useState(false);
     const [loading, setLoading] = useState(true)
     const [exhibits, setExhibits] = useState();
@@ -94,7 +91,6 @@ const HomeScreen = ({ route, navigation }) => {
         )
     },[trigger])
 
-
     function goScan() {
         navigation.replace('QR Scanner')
     }
@@ -125,18 +121,13 @@ const HomeScreen = ({ route, navigation }) => {
                     flex: 0.40,
                     justifyContent: 'space-between',
                     alignItems: 'center',
-
                 }}>
                 <ScanningIcon style={{ stroke: "white" }} stroke="white" home={true}></ScanningIcon>
                 <Text style={{ color: 'white', fontFamily: 'System', fontSize: 37, textAlign: "center" }}>
                     SCAN A CODE TO {"\n"} GET STARTED.
                 </Text>
-
-
                 <ShowMeButton goHelp={goHelp} />
             </View>}
-
-
             {/* If the User has scanned QR codes before */}
             {userScans && exhibits !== undefined && <ScannedExhibits navigation={navigation} image={exhibits.artistImage} data={exhibits} />}
 
@@ -148,6 +139,7 @@ const HomeScreen = ({ route, navigation }) => {
                 <View style={{ flex: 0.4, justifyContent: "flex-end", alignItems: "center", paddingBottom: 40, borderRadius: 15 }}>
                     <CameraButton goScan={goScan} size={90} borderRadius={44} />
                 </View>}
+
         </View>
     )
 }
