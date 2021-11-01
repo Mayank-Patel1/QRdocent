@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Image, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
-import MusicIcon from './SvgComponents/MusicIcon';
+
 
 const ExhibitButton = (props) => {
 

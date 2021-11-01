@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Image, View, StyleSheet, useWindowDimensions, Alert, ScrollView, SafeAreaView } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
-import Generate from './Generate';
-import ExhibitButton from './ExhibitButton';
+import Generate from './Buttons/Generate';
+import ExhibitButton from './Buttons/ExhibitButton';
 import axios from 'axios'
 
 const ScannedExhibits = (props) => {
@@ -28,9 +28,10 @@ const ScannedExhibits = (props) => {
 
             <View
                 style={{
-                    
-                    justifyContent: 'space-between',
+                    display:"flex",
+                    justifyContent: 'center',
                     alignItems: 'center',
+                    
                     
 
                 }}>

@@ -3,8 +3,8 @@ import { Text, Image, View, StyleSheet, TouchableHighlight, TouchableOpacity } f
 import { Button } from 'react-native-paper';
 import Header from '../Components/Header';
 import { OneIcon, TwoIcon, ThreeIcon, FourIcon } from '../Components/SvgComponents/NumberIcons'
-import CameraButton from '../Components/CameraButton';
-import Generate from '../Components/Generate';
+import CameraButton from '../Components/Buttons/CameraButton';
+import Generate from '../Components/Buttons/Generate';
 const HelpScreen = ({navigation}) => {
     const [pageNum, setPageNum] = useState(1);
 
