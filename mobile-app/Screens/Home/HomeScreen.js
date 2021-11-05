@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Image, View, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Text, Image, View, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import CameraButton from './Buttons/CameraButton';
@@ -17,13 +17,25 @@ const HomeScreen = ({ route, navigation }) => {
     const [userScans, setUserScans] = useState(false);
     const [loading, setLoading] = useState(true)
     const [connectionError, setConnectionError] = useState(false)
+    const [count, setCount] = useState(1);
 
     const [exhibits, setExhibits] = useState();
     const [trigger, setTrigger] = useState(true);
 
     if(typeof(route.params) != "undefined"){
-        setTrigger(route.params.trigger)
+        //setTrigger(route.params.trigger)
     }
+
+    if(typeof(route.params) != "undefined"){
+        
+        if(route.params.alert && count == 1) {
+
+            AlertBox(route.params.message)
+            setCount(2)
+            console.log("ren")
+        }
+    }
+
 
 
 
@@ -109,6 +121,13 @@ const HomeScreen = ({ route, navigation }) => {
         refreshToken(navigation, false)
         navigation.replace('Settings')
     }
+
+    function AlertBox(message) {
+        Alert.alert('ERROR', message, [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
+    }
+    
 
     if (loading == true) {
         return (
