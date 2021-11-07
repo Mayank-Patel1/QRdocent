@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
+//Image Card
 function ImageCard(props) {
+    //State for showing the image description 
     const [showDesc, setShow] = useState(false)
     const styles = {
         container: {
@@ -16,19 +18,15 @@ function ImageCard(props) {
             flexDirection: "row",
             marginTop: 15,
             marginBottom: 15,
-
         },
         image: {
-            borderRadius: 20,
-          //  opacity: showDesc ? 0.45 : 1,
-            
+            borderRadius: 20,            
             width: "100%",
             height: "100%",
             backgroundImage: `url("${props.src.URL}")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             position:"relative"
-
         },
         imageContainer: {
             width: "100%",
@@ -61,8 +59,10 @@ function ImageCard(props) {
 
     return (
         <div style={styles.container}>
+            {/* show the description on click */}
             <div style={styles.image} onClick={()=>setShow( showDesc ? false: true)}>
                 <div style={styles.imageContainer}>
+                {/* Show description when showDesc is true*/}
                 {showDesc && <p style={styles.desc}>
                     {props.src.description}
                 </p>}

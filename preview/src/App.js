@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import PreviewScreen from './Pages/PreviewScreen';
 
 function App() {

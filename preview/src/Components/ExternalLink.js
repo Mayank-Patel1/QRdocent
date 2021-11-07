@@ -1,11 +1,8 @@
-import React, {useState}from "react";
+import React from "react";
 
-
-import ExternalLinkIcon from "./ExternalLinkIcon";
-
+// External Link Card
 const ExternalLink = (props) => {
-  const [result, setResult] = useState(null);
-
+  //show the url without https and/or a www subdomain
   const url = new URL(props.src.URL);
   let link;
   if (url.hostname.includes("www.")) {
@@ -14,34 +11,49 @@ const ExternalLink = (props) => {
     link = url.hostname;
   }
 
-  const _handlePressButtonAsync = async () => {
-    
-  };
-
   return (
-    
-      <div style={styles.container}>
-        <div style={styles.title}>{link}</div>
-        <div style={styles.desc}>
-          {props.src.description}
-        </div>
-        <ExternalLinkIcon style={styles.icon} />
-      </div>
-  
+    <div style={styles.container}>
+      <div style={styles.title}>{link}</div>
+      <div style={styles.desc}>{props.src.description}</div>
+      <ExternalLinkIcon style={styles.icon} />
+    </div>
   );
 };
-
+//External Link Icon SVG
+function ExternalLinkIcon(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-external-link"
+      width={25}
+      height={25}
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="white"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M0 0h24v24H0z" stroke="none" />
+      <path d="M11 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-5" />
+      <path d="M10 14L20 4" />
+      <path d="M15 4L20 4 20 9" />
+    </svg>
+  );
+}
+//Card Styles
 const styles = {
   container: {
     width: 190,
     maxWidth: 220,
     height: 74,
     borderRadius: 20,
-    display:"flex",
+    display: "flex",
     backgroundColor: "#2F333C",
     justifyContent: "center",
-    position:"relative",
-    
+    position: "relative",
+
     paddingLeft: 15,
     paddingRight: 60,
     flexDirection: "column",
@@ -55,11 +67,11 @@ const styles = {
   },
   desc: {
     color: "white",
-    fontSize:10
+    fontSize: 10,
   },
   icon: {
     position: "absolute",
     right: 27.6,
   },
-}
+};
 export default ExternalLink;
