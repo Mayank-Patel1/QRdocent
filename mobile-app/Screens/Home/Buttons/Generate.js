@@ -10,8 +10,6 @@ import { storeSpotify, refreshSpotifyToken } from "../../../Authorize/authorize"
 
 const Generate = (props) => {
     const [showModal, setShowModal] = useState(false);
-    const [result, setResult] = useState(null);
-    const [message, setMessage] = useState([1,2,3,4]);
 
 
     const styles = {
@@ -46,33 +44,25 @@ const Generate = (props) => {
   const _handlePressButtonAsync = async () => {
     try {
         let result =  await WebBrowser.openAuthSessionAsync(encodeURI("https://qrdocent.com/api/spotifyLogin"), "exp://exp.host/@danteedmonson/qr-docent");
-        setMessage(JSON.stringify(result))
     let { path, queryParams } = Linking.parse(result.url);
     storeSpotify(queryParams, '@spotify_token')
-    setResult(result);
     
     props.navigation.replace('Generate',{exhibits: props.exhibits})
     }
     catch(err){
-        setMessage(JSON.stringify(result)+ "FAIL")
     }
-console.log("spotify")
     
   };
 
    async function refresh() {
     let result =  await refreshSpotifyToken(props.navigation, {exhibits: props.exhibits});
-    setMessage({result: result})
 
     if(result == false) {
         _handlePressButtonAsync()
     } 
   }
-
-
     return (
         <>
-    
         <MusicModal show={showModal} hide={hideModal} navigation={props.navigation} exhibits={props.exhibits}></MusicModal>
         <TouchableOpacity  style={{ borderRadius: 50 }} onPress={refresh} disabled={props.disable}>
             <LinearGradient
