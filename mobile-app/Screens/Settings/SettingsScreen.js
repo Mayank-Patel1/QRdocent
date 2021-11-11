@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import { View, Text, Dimensions, BackHandler, Alert } from "react-native";
+import React from "react";
+import { View, Text, Dimensions } from "react-native";
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
@@ -22,22 +22,8 @@ function SettingsScreen({ navigation }) {
             backgroundColor: "#2F333C"
         }
     }
-
-    useEffect(() => {
-        const backAction = () => {
-
-        navigation.replace("Home")
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-    
-        return () => backHandler.remove();
-      }, []);
-
-
     function goHome() {
-        navigation.replace("Home");
+        navigation.navigate("Home");
     }
 
     async function disconnectSpotify() {

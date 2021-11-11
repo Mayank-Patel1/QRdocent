@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Text, Image, View, TouchableHighlight, TouchableOpacity, StyleSheet, BackHandler } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, Image, View, TouchableHighlight, TouchableOpacity, StyleSheet } from 'react-native';
 import ScanningIcon from '../Home/Icons/ScanningIcon';
 import Animated, {
     useSharedValue,
@@ -13,14 +13,12 @@ import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { storeSpotify, getSpotify } from "../../Authorize/authorize";
 import { imageData } from './Components/imageData';
-import { SongContext } from '../../Components/SongContext';
 
 function GenerateScreen({ navigation, route }) {
     const move = useSharedValue(0);
     let tracks = [];
     const [message, setMessage] = useState("")
     const [errorPresent, setError] = useState(false)
-    const {songs, setSongs} = useContext(SongContext)
 
 
     let tracksNoDuplicates = []
@@ -35,14 +33,6 @@ function GenerateScreen({ navigation, route }) {
         }
     }, []);
 
-    useEffect(() => {
-        const backAction = () => {
-        navigation.replace("Home")
-          return true;
-        };
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-        return () => backHandler.remove();
-      }, []);
 
     useEffect(() => {
 
@@ -69,14 +59,14 @@ function GenerateScreen({ navigation, route }) {
                     changePlaylist(res.data.id, tokenValue.access_token)
                     return
                 }).catch((err) => {
-                    
+                    console.log("1")
                     setError(true)
                     return navigation.replace('Home', { alert: true, message: "You Need A Spotify Premium Account" })
 
 
                 })
             }).catch((err) => {
-                
+                console.log("2")
                 connectionTimeout()
             })
         }
@@ -107,8 +97,6 @@ function GenerateScreen({ navigation, route }) {
             //createPlaylist(res.data.id, tokenValue.access_token)
         }).catch((err) => {
             console.log(err)
-            console.log(1)
-
             connectionTimeout()
         })
     }
@@ -125,28 +113,9 @@ function GenerateScreen({ navigation, route }) {
                 tracks.push(res.data.tracks[i].uri)
             }
 
-            
-
-
-            // console.log(tracks)
-
-
-            tracks = tracks.map(song=>{
-                if(!songs.includes(song)) {
-                    return song
-                }
-            })
-            tracks = tracks.filter(song => song !== undefined)
-            tracks = [...tracks, ...songs]
-
-
-            // console.log(tracks)
-
             //createPlaylist(res.data.id, tokenValue.access_token)
         }).catch((err) => {
             console.log(err)
-            console.log(2)
-
             connectionTimeout()
         })
     }
@@ -176,8 +145,6 @@ function GenerateScreen({ navigation, route }) {
             //createPlaylist(res.data.id, tokenValue.access_token)
         }).catch((err) => {
             console.log(err)
-            console.log(3)
-
             connectionTimeout()
         })
 
@@ -206,8 +173,6 @@ function GenerateScreen({ navigation, route }) {
             //console.log(res)
         }).catch((err) => {
             console.log(err)
-            console.log(4)
-
             connectionTimeout()
         })
     }
@@ -230,8 +195,7 @@ function GenerateScreen({ navigation, route }) {
 
 
             console.log(err.message)
-            console.log(7)
-            //connectionTimeout()
+            connectionTimeout()
         })
     }
 
@@ -248,15 +212,15 @@ function GenerateScreen({ navigation, route }) {
     };
 
     function addSongs(playlistID, accessToken) {
-        let songsPlaylist = '';
+        let songs = '';
         for (let i = 0; i < tracks.length; i++) {
-            songsPlaylist = songsPlaylist + tracks[i].replace(/:/g, "%3A") + "%2C"
+            songs = songs + tracks[i].replace(/:/g, "%3A") + "%2C"
         }
         //console.log(songs);
 
         axios({
             method: "POST",
-            url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${songsPlaylist}`,
+            url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${songs}`,
             headers: {
                 authorization: `Bearer ${accessToken}`
             }
@@ -267,15 +231,13 @@ function GenerateScreen({ navigation, route }) {
             //createPlaylist(res.data.id, tokenValue.access_token)
         }).catch((err) => {
             console.log(err)
-            console.log(5)
-
             connectionTimeout()
         })
     }
 
     function getSongs(playlistID, accessToken) {
 
-        
+        let songs = '';
 
         //console.log(songs);
 
@@ -312,8 +274,6 @@ function GenerateScreen({ navigation, route }) {
 
         }).catch((err) => {
             console.log(err)
-            console.log(6)
-
             connectionTimeout()
         })
     }
