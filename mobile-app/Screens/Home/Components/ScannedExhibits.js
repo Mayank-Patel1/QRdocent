@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, Image, View, StyleSheet, Dimensions, Alert, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
 import Generate from '../Buttons/Generate';
 import ExhibitButton from '../Buttons/ExhibitButton';
 import axios from 'axios';
 import { getToken, refreshToken } from '../../../Authorize/authorize';
+import { SongContext } from '../../../Components/SongContext';
+
 
 
 const ScannedExhibits = (props) => {
@@ -12,6 +14,8 @@ const ScannedExhibits = (props) => {
     const [outside, setOutside] = useState(false)
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
+    const {songs, setSongs} = useContext(SongContext)
+
 
     function deleteExhibit(scanID) {
         getToken().then(tokenValue => {
@@ -60,11 +64,41 @@ const ScannedExhibits = (props) => {
             setOutside(true)
         else
             setOutside(false)
-
-
-
-
     }
+
+    
+    //songsArray = [...songsArray[0]]
+    useEffect(()=>{
+
+        let songsArray = exhibits.map((exhibit, index)=>{
+            return exhibit.contents.map((content, index)=>{
+                if(content.contentTypeID == 3) {
+                    return content.URL
+                }
+            })
+        })
+        songsArray = [].concat.apply([], songsArray);
+
+    songsArray = songsArray.filter(song => song !== undefined)
+
+    songsArray = songsArray.map(song=>{
+        let songID = song.split("track/")[1].split("?")[0];
+        return "spotify:track:" + songID
+    })
+
+    console.log(songsArray)
+    songsArray = songsArray.map(song=>{
+        if(!songs.includes(song)) {
+            return song
+        }
+    })
+    songsArray = songsArray.filter(song => song !== undefined)
+
+    setSongs([...songs, ...songsArray])
+    console.log(songs)
+
+    },[])
+     
 
     return (
         <>

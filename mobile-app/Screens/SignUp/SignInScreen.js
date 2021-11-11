@@ -123,7 +123,7 @@ const SignInScreen = ({ navigation }) => {
                             underlineColor="white"
                             keyboardType="number-pad"
                             theme={{ colors: { primary: 'white', underlineColor: 'white', text: 'white', placeholder: "white" }, roundness: 20 }}
-                            left={<TextInput.Affix text="+1" textStyle={{marginTop:8}} theme={{ colors: { text: 'white' }, }} style={{marginBottom:10}} />}
+                            left={<TextInput.Affix text="+1" textStyle={{justifyContent:"center"}} theme={{ colors: { text: 'white' }, }} style={{marginBottom:10}} />}
                         />
                         <TouchableOpacity onPress={SignIn}>
                         <SignUpButton />
@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: 313,
-        height: 47,
         backgroundColor: "#2F333C",
         color: "transparent",
         fontSize: 25,

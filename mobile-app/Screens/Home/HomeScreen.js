@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Image, View, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
-import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Text, View, Alert, BackHandler } from 'react-native';
 import CameraButton from './Buttons/CameraButton';
 import ShowMeButton from './Buttons/ShowMeButton';
 import ScanningIcon from './Icons/ScanningIcon';
 import Header from '../../Components/Header';
 import ScannedExhibits from './Components/ScannedExhibits';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../Loading/LoadingScreen';
 import ErrorScreen from '../Error/ErrorScreen';
 import { getToken, refreshToken } from '../../Authorize/authorize';
+import { SongContext } from '../../Components/SongContext';
 
 const HomeScreen = ({ route, navigation }) => {
     const [userScans, setUserScans] = useState(false);
     const [loading, setLoading] = useState(true)
     const [connectionError, setConnectionError] = useState(false)
     const [count, setCount] = useState(1);
-
+    const [songs, setSongs] = useState([])
     const [exhibits, setExhibits] = useState();
     const [trigger, setTrigger] = useState(true);
 
@@ -32,12 +30,30 @@ const HomeScreen = ({ route, navigation }) => {
 
             AlertBox(route.params.message)
             setCount(2)
-            console.log("ren")
         }
     }
 
 
 
+    useEffect(() => {
+        const backAction = () => {
+          Alert.alert('EXITTING','EXIT QR DOCENT?', [
+            {
+              text: 'Cancel',
+              onPress: () => null,
+              style: 'cancel',
+            },
+            { text: 'YES', onPress: () => BackHandler.exitApp() },
+          ]);
+
+        
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    
+        return () => backHandler.remove();
+      }, []);
 
 
 
@@ -71,12 +87,10 @@ const HomeScreen = ({ route, navigation }) => {
                         
                         if (res.data.success == false) {
                              refreshToken(navigation, true)
-                             console.log(tokenValue)
 
                             
                         }
                         else {
-                            console.log(tokenValue)
                             setExhibits(res.data.result.scans);
 
                             if (res.data.result.scans.length !== 0) {
@@ -163,8 +177,9 @@ const HomeScreen = ({ route, navigation }) => {
                 <ShowMeButton goHelp={goHelp} />
             </View>}
             {/* If the User has scanned QR codes before */}
+            
             {userScans && exhibits !== undefined && <ScannedExhibits navigation={navigation} exhibits={exhibits} />}
-
+                
 
             {userScans && exhibits !== undefined ? <View style={{ flex: 0.15, justifyContent: "flex-end", alignItems: "center", paddingBottom: 40, borderRadius: 20 }}>
                 <CameraButton goScan={goScan} size={90} borderRadius={44} />

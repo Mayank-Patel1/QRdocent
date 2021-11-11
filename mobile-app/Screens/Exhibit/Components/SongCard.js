@@ -1,4 +1,4 @@
-import React, {useEffect, useState}from "react";
+import React, {useEffect, useState, useContext}from "react";
 import { URL, URLSearchParams } from "react-native-url-polyfill";
 import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
 import ExternalLinkIcon from "../Buttons/ExternalLinkIcon";
@@ -7,11 +7,12 @@ import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { storeSpotify, getSpotify } from "../../../Authorize/authorize"
 import SpotifyIcon from "../../Home/Icons/SpotifyIcon";
+import { SongContext } from "../../../Components/SongContext";
 
 
 const SongCard = (props) => {
   const [result, setResult] = useState(null);
-  const [songName, setSongName] = useState('')
+  const [songName, setSongName] = useState('');
 
   //const songID = "6ohzjop0VYBRZ12ichlwg5"
 

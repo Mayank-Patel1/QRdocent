@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, useWindowDimensions } from 'react-native';
+import { Text, View, StyleSheet, useWindowDimensions, BackHandler } from 'react-native';
 import { Button } from 'react-native-paper';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Header from '../../Components/Header';
@@ -50,6 +50,16 @@ const QRScreen = ({ navigation }) => {
             setHasPermission(status === 'granted');
         })();
     }, []);
+
+    useEffect(() => {
+        const backAction = () => {
+        navigation.replace("Home")
+          return true;
+        };
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+        return () => backHandler.remove();
+      }, []);
+
 
 
     const handleBarCodeScanned = ({ type, data, bounds }) => {
