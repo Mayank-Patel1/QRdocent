@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, Image, View, TouchableHighlight, TouchableOpacity, StyleSheet, BackHandler} from 'react-native';
+import { Text, Image, View, TouchableHighlight, TouchableOpacity, StyleSheet} from 'react-native';
 import ScanningIcon from '../Home/Icons/ScanningIcon';
 import Animated, {
     useSharedValue,
@@ -26,16 +26,6 @@ function LoadingScreen() {
     useEffect(()=>{
         move.value = withRepeat(withTiming(65, {duration: 1500}), -10, true)
     },[])
-
-    useEffect(() => {
-        const backAction = () => {
-        navigation.replace("Home")
-          return true;
-        };
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-        return () => backHandler.remove();
-      }, []);
-
 
     return (
         <>

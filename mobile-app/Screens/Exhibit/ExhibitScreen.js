@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { IconButton } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import Video from "./Components/Video";
@@ -14,7 +14,7 @@ import {
     ImageBackground,
     ScrollView,
     StyleSheet,
-    BackHandler
+    TouchableWithoutFeedback
 } from "react-native";
 
 const ExhibitScreen = ({ route, navigation }) => {
@@ -28,20 +28,6 @@ const ExhibitScreen = ({ route, navigation }) => {
         right: 0,
         bottom: 0,
     }
-
-    useEffect(()=>{
-        return ()=> setBioHeight(0)
-    },[])
-
-    useEffect(() => {
-        const backAction = () => {
-        navigation.replace("Home")
-          return true;
-        };
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-        return () => backHandler.remove();
-      }, []);
-
 
     const contents = route.params.data.contents.map((data, index)=>{
         switch(data.contentTypeID) {

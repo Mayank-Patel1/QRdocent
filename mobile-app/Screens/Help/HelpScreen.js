@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Image, View, BackHandler } from 'react-native';
+import React, { useState } from 'react';
+import { Text, Image, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import Header from '../../Components/Header'
 import { OneIcon, TwoIcon, ThreeIcon, FourIcon } from './Icons/NumberIcons'
@@ -18,19 +18,6 @@ const HelpScreen = ({navigation}) => {
         //setPageNum(1);
         navigation.replace('Home');
     }
-
-    useEffect(() => {
-        const backAction = () => {
-
-        navigation.replace("Home")
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-    
-        return () => backHandler.remove();
-      }, []);
-
 
     return (
         <View style={styles.container}>

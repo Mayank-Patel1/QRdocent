@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Alert, BackHandler } from 'react-native';
+import { Text, Image, View, TouchableHighlight, TouchableOpacity, Alert } from 'react-native';
+import { DefaultTheme, Provider as PaperProvider, Button, IconButton } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 import CameraButton from './Buttons/CameraButton';
 import ShowMeButton from './Buttons/ShowMeButton';
 import ScanningIcon from './Icons/ScanningIcon';
 import Header from '../../Components/Header';
 import ScannedExhibits from './Components/ScannedExhibits';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../Loading/LoadingScreen';
 import ErrorScreen from '../Error/ErrorScreen';
 import { getToken, refreshToken } from '../../Authorize/authorize';
@@ -35,25 +38,6 @@ const HomeScreen = ({ route, navigation }) => {
 
 
 
-    useEffect(() => {
-        const backAction = () => {
-          Alert.alert('EXITTING','EXIT QR DOCENT?', [
-            {
-              text: 'Cancel',
-              onPress: () => null,
-              style: 'cancel',
-            },
-            { text: 'YES', onPress: () => BackHandler.exitApp() },
-          ]);
-
-        
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-    
-        return () => backHandler.remove();
-      }, []);
 
 
 
