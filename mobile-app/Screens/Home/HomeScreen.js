@@ -9,14 +9,13 @@ import axios from 'axios';
 import LoadingScreen from '../Loading/LoadingScreen';
 import ErrorScreen from '../Error/ErrorScreen';
 import { getToken, refreshToken } from '../../Authorize/authorize';
-import { SongContext } from '../../Components/SongContext';
 
 const HomeScreen = ({ route, navigation }) => {
     const [userScans, setUserScans] = useState(false);
     const [loading, setLoading] = useState(true)
     const [connectionError, setConnectionError] = useState(false)
     const [count, setCount] = useState(1);
-    const [songs, setSongs] = useState([])
+
     const [exhibits, setExhibits] = useState();
     const [trigger, setTrigger] = useState(true);
 
@@ -30,6 +29,7 @@ const HomeScreen = ({ route, navigation }) => {
 
             AlertBox(route.params.message)
             setCount(2)
+            console.log("ren")
         }
     }
 
@@ -87,10 +87,12 @@ const HomeScreen = ({ route, navigation }) => {
                         
                         if (res.data.success == false) {
                              refreshToken(navigation, true)
+                             console.log(tokenValue)
 
                             
                         }
                         else {
+                            console.log(tokenValue)
                             setExhibits(res.data.result.scans);
 
                             if (res.data.result.scans.length !== 0) {
@@ -177,9 +179,8 @@ const HomeScreen = ({ route, navigation }) => {
                 <ShowMeButton goHelp={goHelp} />
             </View>}
             {/* If the User has scanned QR codes before */}
-            
             {userScans && exhibits !== undefined && <ScannedExhibits navigation={navigation} exhibits={exhibits} />}
-                
+
 
             {userScans && exhibits !== undefined ? <View style={{ flex: 0.15, justifyContent: "flex-end", alignItems: "center", paddingBottom: 40, borderRadius: 20 }}>
                 <CameraButton goScan={goScan} size={90} borderRadius={44} />

@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState, useContext} from 'react';
+import React from 'react';
 import { Text, Image, View } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider, Button } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -23,7 +23,6 @@ import LogInScreen from './Screens/LogIn/LogInScreen';
 import SplashScreen from './Screens/Splash/SplashScreen'
 import GenerateScreen from './Screens/Generate_Playlist/GenerateScreen';
 import SettingsScreen from './Screens/Settings/SettingsScreen';
-import { SongContext } from './Components/SongContext';
 
 
 
@@ -37,11 +36,9 @@ const theme = {
 }
 
 const App = () => {
-  const [songs, setSongs] = useState([])
-
 
   return (
-    <SongContext.Provider value={{songs, setSongs}}>
+    <>
             <StatusBar style="light" />
     <PaperProvider>
       <NavigationContainer>
@@ -92,7 +89,7 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
-    </SongContext.Provider>
+    </>
   );
 };
 
