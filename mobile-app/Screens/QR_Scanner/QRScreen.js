@@ -156,12 +156,12 @@ const QRScreen = ({ navigation }) => {
 
   
 
-    if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
+    // if (hasPermission === null) {
+    //     return <Text>Requesting for camera permission</Text>;
+    // }
+    // if (hasPermission === false) {
+    //     return <Text>No access to camera</Text>;
+    // }
 
     
 
@@ -176,7 +176,11 @@ const QRScreen = ({ navigation }) => {
                 <View style={{ flex: 1, justifyContent: "space-between" }}>
                     <Header goHome={goHome} navigation={navigation} showSettings={true}/>
 
-                    <QRscanner scanned={triggerAnimation} setDimensions={setDimensions} invalid={invalid} reset={resetScan} findExhibit={findExhibit} exhibitID={getExhibitID} cancel={cancelAnimation}/>
+                    {hasPermission === null ? 
+                    <View style={{backgroundColor:"black", flex:0.775}}/>:
+                    hasPermission === false ? 
+                    <View style={{backgroundColor:"black", flex:0.775, justifyContent:"center", alignItems:"center"}}><Text style={{color:"white", textAlign:"center", textTransform:"uppercase"}}>{"SETTINGS > PRIVACY > CAMERA \n \n to give Qr Docent access to camera."} </Text></View>:
+                    <QRscanner scanned={triggerAnimation} setDimensions={setDimensions} invalid={invalid} reset={resetScan} findExhibit={findExhibit} exhibitID={getExhibitID} cancel={cancelAnimation}/>}
                
                     <View style={styles.footer}>
                         <Button icon="keyboard-return" color="white" raised labelStyle={{ fontSize: 43, textAlign: "center" }} style={styles.backButton} onPress={goHome}></Button>

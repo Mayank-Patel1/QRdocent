@@ -43,7 +43,7 @@ const Generate = (props) => {
 
   const _handlePressButtonAsync = async () => {
     try {
-        let result =  await WebBrowser.openAuthSessionAsync(encodeURI("https://qrdocent.com/api/spotifyLogin"), "exp://exp.host/@danteedmonson/qr-docent");
+        let result =  await WebBrowser.openAuthSessionAsync(encodeURI("https://qrdocent.com/api/spotifyLogin"), "qrdocent://");
     let { path, queryParams } = Linking.parse(result.url);
     storeSpotify(queryParams, '@spotify_token')
     
