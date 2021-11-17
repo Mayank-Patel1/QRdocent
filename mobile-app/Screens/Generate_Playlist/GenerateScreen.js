@@ -197,7 +197,6 @@ function GenerateScreen({ navigation, route }) {
                 'Content-Type': 'image/jpeg'
             }
         }).then((res) => {
-            // console.log("IN HERRRREEEEEE")
             console.log(res)
         }).catch((err) => {
 

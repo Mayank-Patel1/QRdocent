@@ -7,20 +7,13 @@ function SplashScreen({navigation}) {
     
 
     useEffect(()=>{
-        setTimeout(()=> {
-            navigation.replace("Home")
-        }, 2000)
-       
+            navigation.replace("Home")  
     },[])
 
     return (
         <>
         
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: '#282B33' }}>
-        <Text style={styles.text}>QR DOCENT</Text>
-            <QrLogo width="100" height="100">
-            </QrLogo>
-            
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: '#282B33' }}>    
         </View>
         </>
     )
