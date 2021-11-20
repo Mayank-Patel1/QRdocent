@@ -139,7 +139,7 @@ const HomeScreen = ({ route, navigation }) => {
     }
 
     function AlertBox(message) {
-        Alert.alert('ERROR', message, [
+        Alert.alert('Oh no! 😔', message, [
       { text: 'OK', onPress: () => console.log('OK Pressed') },
     ]);
     }

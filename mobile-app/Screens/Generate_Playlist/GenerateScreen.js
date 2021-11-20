@@ -49,8 +49,9 @@ function GenerateScreen({ navigation, route }) {
             //console.log(route.params.exhibits)
             getSpotify('@spotify_token').then(tokenValue => {
                 if (tokenValue.access_token == null) {
-
+                    console.log("heelllllloooooooo token null")
                 }
+                console.log(tokenValue.access_token)
                 axios({
                     method: "GET",
                     url: "https://api.spotify.com/v1/me",
@@ -67,9 +68,9 @@ function GenerateScreen({ navigation, route }) {
                     changePlaylist(res.data.id, tokenValue.access_token)
                     return
                 }).catch((err) => {
-                    console.log("1")
+                    console.log(err.reason)
                     setError(true)
-                    return navigation.replace('Home', { alert: true, message: "You Need A Spotify Premium Account" })
+                    return navigation.replace('Home', { alert: true, message: "Error connecting Spotify account. \n Try again later!" })
 
 
                 })

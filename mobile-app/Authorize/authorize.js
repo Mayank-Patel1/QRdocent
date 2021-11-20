@@ -108,13 +108,15 @@ const refreshToken = async (navigation, isHome) => {
                     }
 
                 }).then(res => {
-
+                        if (res.data.success == false) {
+                            return false
+                        }
                         tokenValue.access_token = res.data.access_token;
                         storeSpotify(tokenValue, '@spotify_token');
                         navigation.replace("Generate",params);
                         return true;
                       
-                }).catch((err)=> false)
+                }).catch((err)=> { return false})
             }
             catch (err) {
                 
