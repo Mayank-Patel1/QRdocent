@@ -54,7 +54,6 @@ const Generate = (props) => {
     props.navigation.replace('Generate',{exhibits: props.exhibits})
     }
     catch(err){
-        setMessage(JSON.stringify(result)+ "FAIL")
     }
 console.log("spotify")
     
@@ -62,7 +61,6 @@ console.log("spotify")
 
    async function refresh() {
     let result =  await refreshSpotifyToken(props.navigation, {exhibits: props.exhibits});
-    setMessage({result: result})
 
     if(result == false) {
         _handlePressButtonAsync()
