@@ -44,7 +44,7 @@ const HelpScreen = ({navigation}) => {
             {pageNum == 4 && <HelpFour />}
 
             <View style={styles.nextArea}>
-                {pageNum !== 4 && <Button icon="chevron-right" labelStyle={styles.next} style={{ borderRadius:24 }} contentStyle={{ flexDirection: "row-reverse" }} onPress={changePage}>NEXT</Button>}
+                {pageNum !== 4 && <Button mode="outlined" icon="chevron-right" labelStyle={styles.next} style={{ borderRadius:24 }} contentStyle={{ flexDirection: "row-reverse" }} onPress={changePage}>NEXT</Button>}
                 {pageNum == 4 && <Button  labelStyle={styles.next} style={{ borderRadius:24 }} onPress={goHome}>DONE</Button>}
             </View>
         </View>

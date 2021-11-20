@@ -10,9 +10,9 @@ import { storeSpotify, refreshSpotifyToken } from "../../../Authorize/authorize"
 
 const Generate = (props) => {
     const [showModal, setShowModal] = useState(false);
-    let urlLink = false ? "http://192.168.1.155:8000/spotifyLogin" : "https://qrdocent.com/api/spotifyLogin"
+    let urlLink = true ? "http://192.168.1.155:8000/spotifyLogin" : "https://qrdocent.com/api/spotifyLogin"
 
-    let callbackUrl = false ? "exp://192.168.1.155:19000" :"qrdocent://"
+    let callbackUrl = true ? "exp://192.168.1.155:19000" :"qrdocent://"
 
 
     const styles = {
@@ -49,12 +49,11 @@ const Generate = (props) => {
         let result =  await WebBrowser.openAuthSessionAsync(encodeURI(urlLink), callbackUrl);
     let { path, queryParams } = Linking.parse(result.url);
     storeSpotify(queryParams, '@spotify_token')
-    setResult(result);
     
     props.navigation.replace('Generate',{exhibits: props.exhibits})
     }
     catch(err){
-        setMessage(JSON.stringify(result)+ "FAIL")
+        console.log(err)
     }
 console.log("spotify")
     
@@ -62,7 +61,6 @@ console.log("spotify")
 
    async function refresh() {
     let result =  await refreshSpotifyToken(props.navigation, {exhibits: props.exhibits});
-    setMessage({result: result})
 
     if(result == false) {
         _handlePressButtonAsync()
