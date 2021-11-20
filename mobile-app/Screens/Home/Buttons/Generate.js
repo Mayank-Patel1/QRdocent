@@ -10,6 +10,9 @@ import { storeSpotify, refreshSpotifyToken } from "../../../Authorize/authorize"
 
 const Generate = (props) => {
     const [showModal, setShowModal] = useState(false);
+    let urlLink = false ? "http://192.168.1.155:8000/spotifyLogin" : "https://qrdocent.com/api/spotifyLogin"
+
+    let callbackUrl = false ? "exp://192.168.1.155:19000" :"qrdocent://"
 
 
     const styles = {
@@ -43,7 +46,7 @@ const Generate = (props) => {
 
   const _handlePressButtonAsync = async () => {
     try {
-        let result =  await WebBrowser.openAuthSessionAsync(encodeURI("https://qrdocent.com/api/spotifyLogin"), "qrdocent://");
+        let result =  await WebBrowser.openAuthSessionAsync(encodeURI(urlLink), callbackUrl);
     let { path, queryParams } = Linking.parse(result.url);
     storeSpotify(queryParams, '@spotify_token')
     
