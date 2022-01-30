@@ -1,6 +1,6 @@
 import React, {useEffect, useState}from "react";
 import { URL, URLSearchParams } from "react-native-url-polyfill";
-import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions, Image } from "react-native";
 import ExternalLinkIcon from "../Buttons/ExternalLinkIcon";
 import axios from "axios";
 import * as Linking from 'expo-linking';
@@ -43,7 +43,7 @@ const SongCard = (props) => {
         <Text style={styles.desc}>
         {props.name}
         </Text>
-        <SpotifyIcon style={styles.icon} stroke="#1DB954" />
+        <Image source={require('../../../images/Spotify_Icon_CMYK_White.png')} style={styles.icon} />
       </View>
     </TouchableOpacity>
   );
@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     right: 27.6,
+    width:23,
+    height:23
   },
 });
 
