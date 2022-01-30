@@ -39,11 +39,16 @@
 
 ## Introduction
 - ### Problem
-        When a user goes to a museum the may not be engaged during or after their visit. In this new era of technology it's time to introduce these ideas into museums for the next generation.
+        When a user goes to a museum the may not be engaged during or after their visit. In this new era of technology it's
+        time to introduce these ideas into museums for the next generation.
 - ### Purpose
-        The purpose of QR Docent is to lets users make custom Spotify playlists so they can listen to the music they loved from museums again and again. They can simply scan an exhibit's QR code using the app, and a curated list of songs related to that exhibit will be added to a playlist for them.
+        The purpose of QR Docent is to lets users make custom Spotify playlists so they can listen to the music they loved
+        from museums again and again. They can simply scan an exhibit's QR code using the app, and a curated list of songs
+        related to that exhibit will be added to a playlist for them.
 - ### Why 
-        We want QR Docent to provide visitors interesting and relevant content on their own smartphone that they can take home with them after their visit. This personalized list of interactive content will be impactful and keep visitors engaged during their visit.
+        We want QR Docent to provide visitors interesting and relevant content on their own smartphone that they can take home
+        with them after their visit. This personalized list of interactive content will be impactful and keep visitors engaged
+        during their visit.
 
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
@@ -55,13 +60,11 @@
 - PostgreSQL - version 14.1.0
 - NodeJS - version 14.16.1
 <br/>
-<br/>
 
 ## Features
 - Create Playlist: Create a custom spotify playlist of the user scans
 - Scan QR codes: Scan QR codes to add exhibits to the users list
 - Exhibit Information: Each exhibit comes  with different content cards 
-<br/>
 <br/>
 
 ## Screenshots
